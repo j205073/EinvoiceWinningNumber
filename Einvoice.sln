@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1FA47757-0A70-47DF-A71E-E018B8E3623F}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EinvoiceWinningNumber", "EinvoiceWinningNumber\EinvoiceWinningNumber.csproj", "{A13E9ED3-9384-4340-A4A3-30CD8073E31C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{2620019D-B6FE-4FCB-BDE6-1702FE92354D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		CD_ROM|Any CPU = CD_ROM|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		DVD-5|Any CPU = DVD-5|Any CPU
+		Release|Any CPU = Release|Any CPU
+		SingleImage|Any CPU = SingleImage|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A13E9ED3-9384-4340-A4A3-30CD8073E31C}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{A13E9ED3-9384-4340-A4A3-30CD8073E31C}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{A13E9ED3-9384-4340-A4A3-30CD8073E31C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A13E9ED3-9384-4340-A4A3-30CD8073E31C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A13E9ED3-9384-4340-A4A3-30CD8073E31C}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{A13E9ED3-9384-4340-A4A3-30CD8073E31C}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{A13E9ED3-9384-4340-A4A3-30CD8073E31C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A13E9ED3-9384-4340-A4A3-30CD8073E31C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A13E9ED3-9384-4340-A4A3-30CD8073E31C}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{A13E9ED3-9384-4340-A4A3-30CD8073E31C}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{2620019D-B6FE-4FCB-BDE6-1702FE92354D}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{2620019D-B6FE-4FCB-BDE6-1702FE92354D}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{2620019D-B6FE-4FCB-BDE6-1702FE92354D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2620019D-B6FE-4FCB-BDE6-1702FE92354D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2620019D-B6FE-4FCB-BDE6-1702FE92354D}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{2620019D-B6FE-4FCB-BDE6-1702FE92354D}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{2620019D-B6FE-4FCB-BDE6-1702FE92354D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2620019D-B6FE-4FCB-BDE6-1702FE92354D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2620019D-B6FE-4FCB-BDE6-1702FE92354D}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{2620019D-B6FE-4FCB-BDE6-1702FE92354D}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
