@@ -7,6 +7,6 @@ namespace EinvoiceWinningNumber
     /// </summary>
     public static class ProcessUntity
     {
-        public static ProcessModeEnum CurrentProcessMode = ProcessModeEnum.RELEASE;
+        public static ProcessModeEnum CurrentProcessMode = ProcessModeEnum.DEBUG;
     }
 }

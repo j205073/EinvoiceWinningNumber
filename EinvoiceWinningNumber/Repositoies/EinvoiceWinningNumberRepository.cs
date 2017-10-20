@@ -15,7 +15,7 @@ namespace EinvoiceWinningNumber.Repositoies
 
         public EinvoiceApRepository Api { get { return m_api; } }
 
-        public void SandMailHandlerFromStudyOpinion()
+        public void SandMailHandler()
         {
             string currentYear = (DateTime.UtcNow.AddHours(8).Year - 1911).ToString();
             string currentMonth = (DateTime.UtcNow.AddHours(8).Month - 2).ToString().PadLeft(2, '0');
@@ -42,7 +42,7 @@ namespace EinvoiceWinningNumber.Repositoies
                     mailBody.Append(string.Format("統一發票 期別：{0} API回傳訊息：{1}", invTerm, invTermData.msg));
                 else
                 {
-                    result = Api.ConfirmWhetherToWinThePrize(invTermData);
+                    result = Api.ConfirmWhetherToWinThePrize(invTermData.invoYm);
 
                     mailBody.AppendLine(@"<table style=""width: 100%;border: 1px solid #666;border-spacing: initial;margin: 10px 0;"">");
                     mailBody.AppendLine(@"<thead>");

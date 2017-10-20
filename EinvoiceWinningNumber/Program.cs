@@ -15,7 +15,7 @@ namespace EinvoiceWinningNumber
         static void Main(string[] args)
         {
             EinvoiceWinningNumberRepository repo = new EinvoiceWinningNumberRepository();
-            repo.SandMailHandlerFromStudyOpinion();
+            repo.SandMailHandler();
         }
     }
 }
