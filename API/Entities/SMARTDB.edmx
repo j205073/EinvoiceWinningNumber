@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HRISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CODEDTL">
+          <Key>
+            <PropertyRef Name="TYPECD" />
+            <PropertyRef Name="CODECD" />
+          </Key>
+          <Property Name="TYPECD" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="CODECD" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CODENAME" Type="varchar" MaxLength="100" />
+          <Property Name="FIXEDYN" Type="varchar" MaxLength="1" />
+          <Property Name="PAYAMOUNT" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="FATHERCD" Type="varchar" MaxLength="10" />
+          <Property Name="Remark" Type="varchar" MaxLength="10" />
+          <Property Name="TempletID1" Type="decimal" Precision="4" Scale="0" />
+          <Property Name="TempletID2" Type="decimal" Precision="4" Scale="0" />
+          <Property Name="HolidayInclude" Type="varchar" MaxLength="1" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="MaxLeave" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="MaxPay" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="Apportion" Type="varchar" MaxLength="1" />
+          <Property Name="TempletID3" Type="decimal" Precision="4" Scale="0" />
+          <Property Name="MinUnit" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="ChineseName2" Type="nvarchar" MaxLength="100" />
+          <Property Name="EnglishName2" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityContainer Name="HRISModelStoreContainer">
+          <EntitySet Name="CODEDTL" EntityType="Self.CODEDTL" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HRISModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CODEDTL">
+          <Key>
+            <PropertyRef Name="TYPECD" />
+            <PropertyRef Name="CODECD" />
+          </Key>
+          <Property Name="TYPECD" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CODECD" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CODENAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FIXEDYN" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="PAYAMOUNT" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="FATHERCD" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TempletID1" Type="Decimal" Precision="4" Scale="0" />
+          <Property Name="TempletID2" Type="Decimal" Precision="4" Scale="0" />
+          <Property Name="HolidayInclude" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MaxLeave" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="MaxPay" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="Apportion" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="TempletID3" Type="Decimal" Precision="4" Scale="0" />
+          <Property Name="MinUnit" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="ChineseName2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EnglishName2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="HRISDB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CODEDTL" EntityType="Self.CODEDTL" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HRISModelStoreContainer" CdmEntityContainer="HRISDB">
+          <EntitySetMapping Name="CODEDTL">
+            <EntityTypeMapping TypeName="HRISModel.CODEDTL">
+              <MappingFragment StoreEntitySet="CODEDTL">
+                <ScalarProperty Name="TYPECD" ColumnName="TYPECD" />
+                <ScalarProperty Name="CODECD" ColumnName="CODECD" />
+                <ScalarProperty Name="CODENAME" ColumnName="CODENAME" />
+                <ScalarProperty Name="FIXEDYN" ColumnName="FIXEDYN" />
+                <ScalarProperty Name="PAYAMOUNT" ColumnName="PAYAMOUNT" />
+                <ScalarProperty Name="FATHERCD" ColumnName="FATHERCD" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="TempletID1" ColumnName="TempletID1" />
+                <ScalarProperty Name="TempletID2" ColumnName="TempletID2" />
+                <ScalarProperty Name="HolidayInclude" ColumnName="HolidayInclude" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="MaxLeave" ColumnName="MaxLeave" />
+                <ScalarProperty Name="MaxPay" ColumnName="MaxPay" />
+                <ScalarProperty Name="Apportion" ColumnName="Apportion" />
+                <ScalarProperty Name="TempletID3" ColumnName="TempletID3" />
+                <ScalarProperty Name="MinUnit" ColumnName="MinUnit" />
+                <ScalarProperty Name="ChineseName2" ColumnName="ChineseName2" />
+                <ScalarProperty Name="EnglishName2" ColumnName="EnglishName2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

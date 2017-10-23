@@ -172,6 +172,9 @@
     <Compile Include="Entities\C0701.cs">
       <DependentUpon>INVDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\CODEDTL.cs">
+      <DependentUpon>SMARTDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\D0401D.cs">
       <DependentUpon>INVDB.tt</DependentUpon>
     </Compile>
@@ -180,6 +183,24 @@
     </Compile>
     <Compile Include="Entities\D0501.cs">
       <DependentUpon>INVDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Employee.cs">
+      <DependentUpon>PORTALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ERPDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ERPDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ERPDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ERPDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ERPDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ERPDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Entities\INVDB.Context.cs">
       <AutoGen>True</AutoGen>
@@ -196,26 +217,41 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>INVDB.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Entities\NavisionNewDB.Context.cs">
+    <Compile Include="Entities\PORTALDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>NavisionNewDB.Context.tt</DependentUpon>
+      <DependentUpon>PORTALDB.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entities\NavisionNewDB.cs">
+    <Compile Include="Entities\PORTALDB.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>NavisionNewDB.tt</DependentUpon>
+      <DependentUpon>PORTALDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entities\NavisionNewDB.Designer.cs">
+    <Compile Include="Entities\PORTALDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>NavisionNewDB.edmx</DependentUpon>
+      <DependentUpon>PORTALDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Entities\Rinnai_Sales_Invoice_Line.cs">
-      <DependentUpon>NavisionNewDB.tt</DependentUpon>
+      <DependentUpon>ERPDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\Rinnai_Service_Ledger_Entry.cs">
-      <DependentUpon>NavisionNewDB.tt</DependentUpon>
+      <DependentUpon>ERPDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SMARTDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SMARTDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SMARTDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SMARTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\SMARTDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SMARTDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Entities\SParameter.cs">
       <DependentUpon>INVDB.tt</DependentUpon>
@@ -237,13 +273,23 @@
     <Compile Include="Modules\ApiModules\Modules\EinvoiceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositoies\ApiRepositories\APIRepository.cs" />
-    <Compile Include="Repositoies\ApiRepositories\EinvoiceApRepository.cs" />
+    <Compile Include="Repositoies\ApiRepositories\EinvoiceApiRepository.cs" />
     <Compile Include="Repositoies\ApiRepositories\JsonpFormatter.cs" />
     <Compile Include="Repositoies\PublicRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Entities\ERPDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ERPDB.edmx</DependentUpon>
+      <LastGenOutput>ERPDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Entities\ERPDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ERPDB.edmx</DependentUpon>
+      <LastGenOutput>ERPDB.cs</LastGenOutput>
+    </Content>
     <Content Include="Entities\INVDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>INVDB.Context.cs</LastGenOutput>
@@ -254,15 +300,25 @@
       <DependentUpon>INVDB.edmx</DependentUpon>
       <LastGenOutput>INVDB.cs</LastGenOutput>
     </Content>
-    <Content Include="Entities\NavisionNewDB.Context.tt">
+    <Content Include="Entities\PORTALDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NavisionNewDB.edmx</DependentUpon>
-      <LastGenOutput>NavisionNewDB.Context.cs</LastGenOutput>
+      <DependentUpon>PORTALDB.edmx</DependentUpon>
+      <LastGenOutput>PORTALDB.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Entities\NavisionNewDB.tt">
+    <Content Include="Entities\PORTALDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NavisionNewDB.edmx</DependentUpon>
-      <LastGenOutput>NavisionNewDB.cs</LastGenOutput>
+      <DependentUpon>PORTALDB.edmx</DependentUpon>
+      <LastGenOutput>PORTALDB.cs</LastGenOutput>
+    </Content>
+    <Content Include="Entities\SMARTDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SMARTDB.edmx</DependentUpon>
+      <LastGenOutput>SMARTDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Entities\SMARTDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SMARTDB.edmx</DependentUpon>
+      <LastGenOutput>SMARTDB.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -277,12 +333,26 @@
     <Content Include="Entities\INVDB.edmx.diagram">
       <DependentUpon>INVDB.edmx</DependentUpon>
     </Content>
-    <EntityDeploy Include="Entities\NavisionNewDB.edmx">
+    <EntityDeploy Include="Entities\SMARTDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>NavisionNewDB.Designer.cs</LastGenOutput>
+      <LastGenOutput>SMARTDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Entities\NavisionNewDB.edmx.diagram">
-      <DependentUpon>NavisionNewDB.edmx</DependentUpon>
+    <Content Include="Entities\SMARTDB.edmx.diagram">
+      <DependentUpon>SMARTDB.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Entities\PORTALDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PORTALDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Entities\PORTALDB.edmx.diagram">
+      <DependentUpon>PORTALDB.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Entities\ERPDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ERPDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Entities\ERPDB.edmx.diagram">
+      <DependentUpon>ERPDB.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

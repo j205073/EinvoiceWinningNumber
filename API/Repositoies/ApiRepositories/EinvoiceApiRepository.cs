@@ -1,6 +1,7 @@
 ﻿using API.Entities;
 using API.Models.ApiModels.EinvoiceModels.EinvoiceApiModels.EinvoiceWinningNumberModels;
 using Newtonsoft.Json;
+using RinnaiPortal.Repository;
 using RinnaiPortalOpenApi.Models;
 using RinnaiPortalOpenApi.Models.EinvoiceApiModels.EinvoiceDetalisModels;
 using RinnaiPortalOpenApi.Models.EinvoiceApiModels.EinvoiceWinningNumberModels;
@@ -13,7 +14,7 @@ using System.Text;
 
 namespace RinnaiPortalOpenApi.Repositories
 {
-    public class EinvoiceApRepository
+    public class EinvoiceApiRepository
     {
         private INVDB m_invdb = new INVDB();
         private INVDB InvDB { get { return m_invdb; } set { m_invdb = value; } }
@@ -72,7 +73,8 @@ namespace RinnaiPortalOpenApi.Repositories
         /// <param name="endDate">ex.10610</param>
         private Dictionary<string, List<C0401H>> GetAllEinvoice(string invoYm)
         {
-            IEnumerable<IGrouping<string, C0401H>> groupInv = this.InvDB.C0401H.GroupBy(x => x.MInvoiceDate.Substring(0, 6));
+            IEnumerable<IGrouping<string, C0401H>> groupInv = this.InvDB.C0401H
+                .GroupBy(x => x.MInvoiceDate.Substring(0, 6));
             Dictionary<string, List<C0401H>> groupInvLast = new Dictionary<string, List<C0401H>>();
             //發票按月份分組
             foreach (IGrouping<string, C0401H> group in groupInv)
@@ -135,7 +137,83 @@ namespace RinnaiPortalOpenApi.Repositories
             }
 
             Dictionary<string, List<EinvoiceDataModel>> filterData = FilterWinning(resultData);
+            GetDeatilsInfo(ref filterData);
+
             return filterData;
+        }
+
+        /// <summary>
+        /// 取得其他資訊資訊(包含開立部門) 並依開立部門分類 近來為日期分類，出去為部門分類
+        /// </summary>
+        /// <param name="data"></param>
+        private void GetDeatilsInfo(ref Dictionary<string, List<EinvoiceDataModel>> data)
+        {
+            DBERP erpDB = new DBERP();
+            HRISDB smartmanDB = new HRISDB();
+            PORTALDB portalDB = new PORTALDB();
+            foreach (var d in data)
+            {
+                var model = d.Value;
+                foreach (var inv in model)
+                {
+                    string invNo = inv.Data.MInvoiceNumber;
+
+                    #region 依照發票號碼取出訂單號以及開立單位代碼
+
+                    inv.Detalis = erpDB.Rinnai_Sales_Invoice_Line
+                    .Where(o => o.VAT_Transaction_Number == invNo)
+                    .Select(o => new DetalisInfo()
+                    {
+                        OrderNo = o.Shipment_No_,
+                        DepartmentCode = o.Shortcut_Dimension_1_Code
+                    })
+                    .FirstOrDefault();
+
+                    #endregion 依照發票號碼取出訂單號以及開立單位代碼
+
+                    #region 找出單位主管以及單位名稱
+
+                    if (inv.Detalis != null)
+                    {
+                        var detalis =
+                        smartmanDB.CODEDTL
+                        .Where(s => s.TYPECD == "UNIT" &&
+                            s.CODECD == inv.Detalis.DepartmentCode).First();
+                        var mailObj = portalDB.Employee.Where(o => o.EmployeeID == detalis.Remark).FirstOrDefault();
+                        inv.Detalis.MailToObject = mailObj == null ? "" : mailObj.ADAccount;
+                        inv.Detalis.DepartmentName = detalis.CODENAME;
+                    }
+                    else
+                    {
+                        inv.Detalis = new DetalisInfo()
+                        {
+                            OrderNo = "查無資料",
+                            DepartmentName = "查無資料",
+                            DepartmentCode = "查無資料",
+                            MailToObject = PublicRepository.AdminEmail
+                        };
+                    }
+
+                    #endregion 找出單位主管以及單位名稱
+                }
+
+                #region 依照開立單位分類群組
+
+                List<EinvoiceDataModel> preGroup = new List<EinvoiceDataModel>();
+                foreach (var da in data)
+                {
+                    foreach (var item in da.Value)
+                        preGroup.Add(item);
+                }
+
+                Dictionary<string, List<EinvoiceDataModel>> groupDepInv = preGroup
+                .GroupBy(o => o.Detalis.DepartmentCode)
+                .ToDictionary(g => g.Key, g => g.ToList());
+
+                data = groupDepInv;
+
+                #endregion 依照開立單位分類群組
+            }
         }
 
         /// <summary>
@@ -323,7 +401,7 @@ namespace RinnaiPortalOpenApi.Repositories
         public string GetEinvoiceNoByOrderNo(string orderNo)
         {
             string einvoiceNo = string.Empty;
-            NavisionNewDB db = new NavisionNewDB();
+            DBERP db = new DBERP();
             var order = db.Rinnai_Service_Ledger_Entry.Where(o => o.Service_Order_No_ == orderNo && o.Document_Type == 2).FirstOrDefault();
             if (order == null)
                 throw new Exception("[系統]無法取得該訂單相關資料");

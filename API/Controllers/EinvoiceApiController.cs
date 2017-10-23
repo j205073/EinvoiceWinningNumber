@@ -13,8 +13,8 @@ namespace API.Controllers
 {
     public class EinvoiceApiController : ApiController
     {
-        private EinvoiceApRepository m_repository = new EinvoiceApRepository();
-        private EinvoiceApRepository Repository { get { return m_repository; } set { this.m_repository = value; } }
+        private EinvoiceApiRepository m_repository = new EinvoiceApiRepository();
+        private EinvoiceApiRepository Repository { get { return m_repository; } set { this.m_repository = value; } }
 
         /// <summary>
         /// 查詢統一發票中獎名單

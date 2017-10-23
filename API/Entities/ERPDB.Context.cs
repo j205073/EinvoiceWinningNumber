@@ -13,10 +13,10 @@ namespace API.Entities
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class NavisionNewDB : DbContext
+    public partial class DBERP : DbContext
     {
-        public NavisionNewDB()
-            : base("name=NavisionNewDB")
+        public DBERP()
+            : base("name=DBERP")
         {
         }
     

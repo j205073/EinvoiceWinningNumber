@@ -1,7 +1,7 @@
 ﻿namespace RinnaiPortalOpenApi.Models.EinvoiceApiModels.EinvoiceWinningNumberModels
 {
     /// <summary>
-    /// 財政部電子票API 中獎號碼查詢回船模型
+    /// 財政部電子票API 中獎號碼查詢回傳模型
     /// </summary>
     public class EinvoiceWinningNumberResultModel
     {

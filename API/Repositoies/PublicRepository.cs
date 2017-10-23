@@ -9,6 +9,8 @@ namespace RinnaiPortal.Repository
 {
     public static class PublicRepository
     {
+        public static string AdminEmail { get { return "junchen.liu@rinnai.com.tw"; } }
+
         /// <summary>
         /// To the full taiwan date.
         /// </summary>

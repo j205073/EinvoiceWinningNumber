@@ -4,9 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="19d6de23399b45a09018df162a749f5f" Name="Diagram1" ZoomLevel="31">
-        <EntityTypeShape EntityType="NavisionNewModel.Rinnai_Sales_Invoice_Line" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NavisionNewModel.Rinnai_Service_Ledger_Entry" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="e3dde0d87b2749a6b2755b6aa0415e70" Name="Diagram1">
+        <EntityTypeShape EntityType="HRISModel.CODEDTL" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
