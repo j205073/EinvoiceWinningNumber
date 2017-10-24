@@ -7,7 +7,7 @@ using RinnaiPortalOpenApi.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Linq;
 namespace EinvoiceWinningNumber.Repositoies
 {
     internal class EinvoiceWinningNumberRepository
@@ -38,8 +38,16 @@ namespace EinvoiceWinningNumber.Repositoies
                 StringBuilder mailBody = new StringBuilder();
 
                 EinvoiceWinningNumberResultModel invTermData = Api.GetEinvoiceWinningNumbers(invTerm);
+                invTermData.code = "500';";
                 if (invTermData.code != "200")
+                {
                     mailBody.Append(string.Format("統一發票 期別：{0} API回傳訊息：{1}", invTerm, invTermData.msg));
+                    info.To = PublicRepository.AdminEmail;
+                    info.Body = mailBody;
+                    //寄信
+                    Mailer mailer = new Mailer(info);
+                    mailer.SendMail();
+                }
                 else
                 {
                     result = Api.ConfirmWhetherToWinThePrize(invTermData.invoYm);
@@ -47,6 +55,7 @@ namespace EinvoiceWinningNumber.Repositoies
                     StringBuilder adminMailBody = new StringBuilder();
                     foreach (var r in result)
                     {
+                        mailBody.AppendLine(@"<p><strong>以下為各單位本期<span style=""color: #ff0000;"">中獎發票號碼</span>清單，請將發票列印出後五天內以雙掛號寄給消費者，謝謝。</strong></p>");
                         mailBody.AppendLine(@"<table style=""width: 100%;border: 1px solid #666;border-spacing: initial;margin: 10px 0;"">");
                         mailBody.AppendLine(@"<thead>");
                         mailBody.AppendLine(@"<tr>");
@@ -56,7 +65,7 @@ namespace EinvoiceWinningNumber.Repositoies
                         mailBody.AppendLine(@"<th>發票號碼</th>");
                         mailBody.AppendLine(@"<th>中獎期數</th>");
                         mailBody.AppendLine(@"<th>中獎號碼</th>");
-                        mailBody.AppendLine(@"<th>中獎獎別</th>");
+                        //mailBody.AppendLine(@"<th>中獎獎別</th>");
                         mailBody.AppendLine(@"</tr>");
                         mailBody.AppendLine(@"</thead>");
 
@@ -90,9 +99,9 @@ namespace EinvoiceWinningNumber.Repositoies
                             mailBody.AppendLine(inv.WinningNumber);
                             mailBody.AppendLine(@"</td>");
 
-                            mailBody.AppendLine(@"<td style=""border: 1px solid #ccc;"">");
-                            mailBody.AppendLine(inv.WinningType.ToString());
-                            mailBody.AppendLine(@"</td>");
+                            //mailBody.AppendLine(@"<td style=""border: 1px solid #ccc;"">");
+                            //mailBody.AppendLine(inv.WinningType.ToString());
+                            //mailBody.AppendLine(@"</td>");
 
                             mailBody.AppendLine(@"</tr>");
                         }
@@ -100,8 +109,10 @@ namespace EinvoiceWinningNumber.Repositoies
                         mailBody.AppendLine(@"</table>");
                         info.Body = mailBody;
                         adminMailBody.AppendLine(mailBody.ToString());
-                        //info.To = r.Value.First().Detalis.MailToObject + "@rinnai.com.tw";
-                        info.To = PublicRepository.AdminEmail;
+                        if (ProcessUntity.CurrentProcessMode == ProcessModeEnum.RELEASE)
+                            info.To = r.Value.First().Detalis.MailToObject + "@rinnai.com.tw";
+                        else
+                            info.To = PublicRepository.AdminEmail;
                         //寄信
                         Mailer mailer = new Mailer(info);
                         mailer.SendMail();
