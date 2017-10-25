@@ -179,9 +179,11 @@ namespace RinnaiPortalOpenApi.Repositories
                         smartmanDB.CODEDTL
                         .Where(s => s.TYPECD == "UNIT" &&
                             s.CODECD == inv.Detalis.DepartmentCode).First();
-                        var mailObj = portalDB.Employee.Where(o => o.EmployeeID == detalis.Remark).FirstOrDefault();
-                        inv.Detalis.MailToObject = mailObj == null ? "" : mailObj.ADAccount;
+
                         inv.Detalis.DepartmentName = detalis.CODENAME;
+
+                        //var mailObj = portalDB.Employee.Where(o => o.EmployeeID == detalis.Remark).FirstOrDefault();
+                        //inv.Detalis.MailToObject = mailObj == null ? "" : mailObj.ADAccount;
                     }
                     else
                     {
@@ -190,7 +192,7 @@ namespace RinnaiPortalOpenApi.Repositories
                             OrderNo = "查無資料",
                             DepartmentName = "查無資料",
                             DepartmentCode = "查無資料",
-                            MailToObject = PublicRepository.AdminEmail
+                            MailToObject = new List<string>() { PublicRepository.AdminEmail }
                         };
                     }
 
@@ -214,6 +216,64 @@ namespace RinnaiPortalOpenApi.Repositories
 
                 #endregion 依照開立單位分類群組
             }
+        }
+
+        /// <summary>
+        /// 取得部門下所有的通知清單
+        /// </summary>
+        /// <param name="depID"></param>
+        /// <returns></returns>
+        public List<string> GetMailToObjectGroupByDepartmentID(string depID)
+        {
+            EinvoiceLogger eLog = new EinvoiceLogger();
+            List<string> objGroup = eLog.WinningContactMain
+                .Join(
+                eLog.WinningContactDetails,
+                t1 => t1.ID,
+                t2 => t2.Map_Main_ID,
+                (main, details) =>
+                    new
+                    {
+                        main.Ref_Department_ID,
+                        details.Contact_Email_Addr,
+                        details.Contact_Email_Domain
+                    }
+                )
+                .Where(o => o.Ref_Department_ID == depID)
+                .Select(s => string.Concat(s.Contact_Email_Addr, s.Contact_Email_Domain))
+                .ToList();
+
+            return objGroup;
+        }
+
+        /// <summary>
+        /// 通知歷史寫入
+        /// </summary>
+        /// <param name="invTerm"></param>
+        /// <param name="data"></param>
+        public void WriteContactEmailLog(string invTerm, KeyValuePair<string, List<EinvoiceDataModel>> data, List<string> mailTo, bool sendIsSuccess)
+        {
+            EinvoiceLogger eLog = new EinvoiceLogger();
+            List<ContactHistoy> logList = new List<ContactHistoy>();
+            foreach (var d in data.Value)
+            {
+                ContactHistoy temp = new ContactHistoy()
+                {
+                    OrderNum = d.Detalis.OrderNo,
+                    Ref_Department_ID = d.Detalis.DepartmentCode,
+                    Ref_Department_Name = d.Detalis.DepartmentName,
+                    SendTime = DateTime.UtcNow.AddHours(8),
+                    TargetEmail = string.Join("|", mailTo),
+                    WinningLevel = d.WinningType.ToString(),
+                    WinningNum = d.WinningNumber,
+                    WinningPeriod = invTerm,
+                    Status = sendIsSuccess ? "success" : "fail",
+                    Messages = sendIsSuccess ? "通知成功" : "通知失敗"
+                };
+                logList.Add(temp);
+            }
+            eLog.ContactHistoy.AddRange(logList);
+            eLog.SaveChanges();
         }
 
         /// <summary>

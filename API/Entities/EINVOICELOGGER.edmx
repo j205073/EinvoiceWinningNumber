@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EinvoiceLoggerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ContactHistoy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ref_Department_ID" Type="nvarchar" MaxLength="20" />
+          <Property Name="Ref_Department_Name" Type="nvarchar" MaxLength="20" />
+          <Property Name="WinningPeriod" Type="nchar" MaxLength="5" />
+          <Property Name="WinningNum" Type="nvarchar" MaxLength="20" />
+          <Property Name="OrderNum" Type="nvarchar" MaxLength="20" />
+          <Property Name="TargetEmail" Type="nvarchar(max)" />
+          <Property Name="WinningLevel" Type="nvarchar" MaxLength="15" />
+          <Property Name="SendTime" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Messages" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="WinningContactDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Map_Main_ID" Type="int" Nullable="false" />
+          <Property Name="Contact_Email_Addr" Type="nvarchar" MaxLength="50" />
+          <Property Name="Contact_Email_Domain" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="WinningContactMain">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ref_Department_ID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Ref_Department_Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityContainer Name="EinvoiceLoggerModelStoreContainer">
+          <EntitySet Name="ContactHistoy" EntityType="Self.ContactHistoy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WinningContactDetails" EntityType="Self.WinningContactDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WinningContactMain" EntityType="Self.WinningContactMain" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EinvoiceLoggerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="WinningContactDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Map_Main_ID" Type="Int32" Nullable="false" />
+          <Property Name="Contact_Email_Addr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contact_Email_Domain" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="EinvoiceLogger" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="WinningContactDetails" EntityType="Self.WinningContactDetails" />
+          <EntitySet Name="WinningContactMain" EntityType="EinvoiceLoggerModel.WinningContactMain" />
+          <EntitySet Name="ContactHistoy" EntityType="EinvoiceLoggerModel.ContactHistoy" />
+        </EntityContainer>
+        <EntityType Name="WinningContactMain">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ref_Department_ID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Ref_Department_Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ContactHistoy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ref_Department_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Ref_Department_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="WinningPeriod" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="WinningNum" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="OrderNum" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TargetEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WinningLevel" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="SendTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Messages" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EinvoiceLoggerModelStoreContainer" CdmEntityContainer="EinvoiceLogger">
+          <EntitySetMapping Name="WinningContactDetails">
+            <EntityTypeMapping TypeName="EinvoiceLoggerModel.WinningContactDetails">
+              <MappingFragment StoreEntitySet="WinningContactDetails">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Map_Main_ID" ColumnName="Map_Main_ID" />
+                <ScalarProperty Name="Contact_Email_Addr" ColumnName="Contact_Email_Addr" />
+                <ScalarProperty Name="Contact_Email_Domain" ColumnName="Contact_Email_Domain" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WinningContactMain">
+            <EntityTypeMapping TypeName="EinvoiceLoggerModel.WinningContactMain">
+              <MappingFragment StoreEntitySet="WinningContactMain">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Ref_Department_Name" ColumnName="Ref_Department_Name" />
+                <ScalarProperty Name="Ref_Department_ID" ColumnName="Ref_Department_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContactHistoy">
+            <EntityTypeMapping TypeName="EinvoiceLoggerModel.ContactHistoy">
+              <MappingFragment StoreEntitySet="ContactHistoy">
+                <ScalarProperty Name="Messages" ColumnName="Messages" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SendTime" ColumnName="SendTime" />
+                <ScalarProperty Name="WinningLevel" ColumnName="WinningLevel" />
+                <ScalarProperty Name="TargetEmail" ColumnName="TargetEmail" />
+                <ScalarProperty Name="OrderNum" ColumnName="OrderNum" />
+                <ScalarProperty Name="WinningNum" ColumnName="WinningNum" />
+                <ScalarProperty Name="WinningPeriod" ColumnName="WinningPeriod" />
+                <ScalarProperty Name="Ref_Department_Name" ColumnName="Ref_Department_Name" />
+                <ScalarProperty Name="Ref_Department_ID" ColumnName="Ref_Department_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

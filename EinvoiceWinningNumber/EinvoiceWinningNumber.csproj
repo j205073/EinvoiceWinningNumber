@@ -43,9 +43,6 @@
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Mailer">
-      <HintPath>..\..\..\..\元件\Mailer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -75,6 +72,10 @@
     <ProjectReference Include="..\API\API.csproj">
       <Project>{2620019d-b6fe-4fcb-bde6-1702fe92354d}</Project>
       <Name>API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MailerAPI\Mailer\Mailer.csproj">
+      <Project>{1f36eee7-581d-43d4-bcb5-b6d8809cf43e}</Project>
+      <Name>Mailer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

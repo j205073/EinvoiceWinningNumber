@@ -6,8 +6,9 @@ using RinnaiPortalOpenApi.Models.EinvoiceApiModels.EinvoiceWinningNumberModels;
 using RinnaiPortalOpenApi.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
+using System.Text;
+
 namespace EinvoiceWinningNumber.Repositoies
 {
     internal class EinvoiceWinningNumberRepository
@@ -25,12 +26,10 @@ namespace EinvoiceWinningNumber.Repositoies
             try
             {
                 string subject = (ProcessUntity.CurrentProcessMode == ProcessModeEnum.DEBUG) ? string.Format("[系統部測試]：電子發票 {0}月份中獎名單", invTerm) : string.Format("[通知]：電子發票 {0}月份中獎名單", invTerm);
-                List<string> cc = (ProcessUntity.CurrentProcessMode == ProcessModeEnum.DEBUG) ? new List<string>() { "juncheng.liu" } : new List<string>() { "juncheng.liu" };
+                List<string> cc = new List<string>() { "juncheng.liu@rinnai.com.tw" };
 
                 var info = new MailInfo()
                 {
-                    AddresseeTemp = "{0}@rinnai.com.tw",
-                    DomainPattern = @".*@rinnai.com.tw*",
                     Subject = subject,
                     CC = cc,
                 };
@@ -38,11 +37,11 @@ namespace EinvoiceWinningNumber.Repositoies
                 StringBuilder mailBody = new StringBuilder();
 
                 EinvoiceWinningNumberResultModel invTermData = Api.GetEinvoiceWinningNumbers(invTerm);
-                invTermData.code = "500';";
+
                 if (invTermData.code != "200")
                 {
-                    mailBody.Append(string.Format("統一發票 期別：{0} API回傳訊息：{1}", invTerm, invTermData.msg));
-                    info.To = PublicRepository.AdminEmail;
+                    mailBody.Append(string.Format("統一發票 期別：{0} API回傳代碼：{1} API回傳訊息：{2}", invTerm, invTermData.code, invTermData.msg));
+                    info.To = new List<string>() { PublicRepository.AdminEmail };
                     info.Body = mailBody;
                     //寄信
                     Mailer mailer = new Mailer(info);
@@ -109,30 +108,55 @@ namespace EinvoiceWinningNumber.Repositoies
                         mailBody.AppendLine(@"</table>");
                         info.Body = mailBody;
                         adminMailBody.AppendLine(mailBody.ToString());
+
+                        #region Mail 通知各單位
+
+                        List<string> mailTo = new List<string>();
                         if (ProcessUntity.CurrentProcessMode == ProcessModeEnum.RELEASE)
-                            info.To = r.Value.First().Detalis.MailToObject + "@rinnai.com.tw";
+                        {
+                            int defaultIntoCount = r.Value.First().Detalis.MailToObject.Count;
+                            if (defaultIntoCount == 0)
+                                mailTo = Api.GetMailToObjectGroupByDepartmentID(r.Key);
+                            else
+                                mailTo = r.Value.First().Detalis.MailToObject;
+                            info.To = mailTo;
+                        }
                         else
-                            info.To = PublicRepository.AdminEmail;
+                            info.To = new List<string>() { PublicRepository.AdminEmail };
                         //寄信
                         Mailer mailer = new Mailer(info);
-                        mailer.SendMail();
+                        var isSuccessSend = mailer.SendMail();
+
+                        #region 寫入寄信Log檔
+
+                        Api.WriteContactEmailLog(invTerm, r, info.To, isSuccessSend);
+
+                        #endregion 寫入寄信Log檔
+
+                        #endregion Mail 通知各單位
+
                         mailBody.Clear();
                     }
 
-                    #region 傳送全部資料至資訊管理員
+                    #region 傳送全部資料至資訊課人員
 
+                    List<string> adminGroup = Api.GetMailToObjectGroupByDepartmentID(PublicRepository.AdminDepartmentCode);
                     var adminInfo = new MailInfo()
                     {
-                        AddresseeTemp = "{0}@rinnai.com.tw",
-                        DomainPattern = @".*@rinnai.com.tw*",
                         Subject = subject,
-                        To = PublicRepository.AdminEmail,
+                        To = adminGroup,
                         CC = cc,
                         Body = adminMailBody
                     };
-                    new Mailer(adminInfo).SendMail();
+                    var isSuccessAdminSend = new Mailer(adminInfo).SendMail();
 
-                    #endregion 傳送全部資料至資訊管理員
+                    #region 寫入寄信Log檔
+
+                    result.All(a => { Api.WriteContactEmailLog(invTerm, a, adminInfo.To, isSuccessAdminSend); return true; });
+
+                    #endregion 寫入寄信Log檔
+
+                    #endregion 傳送全部資料至資訊課人員
                 }
             }
             catch (Exception ex)

@@ -9,7 +9,14 @@ namespace RinnaiPortal.Repository
 {
     public static class PublicRepository
     {
+        /// <summary>
+        /// 系統管理員Email帳號
+        /// </summary>
         public static string AdminEmail { get { return "junchen.liu@rinnai.com.tw"; } }
+        /// <summary>
+        /// 資訊課單位代碼
+        /// </summary>
+        public static string AdminDepartmentCode { get { return "2600"; } }
 
         /// <summary>
         /// To the full taiwan date.

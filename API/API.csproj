@@ -175,6 +175,9 @@
     <Compile Include="Entities\CODEDTL.cs">
       <DependentUpon>SMARTDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\ContactHistoy.cs">
+      <DependentUpon>EINVOICELOGGER.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\D0401D.cs">
       <DependentUpon>INVDB.tt</DependentUpon>
     </Compile>
@@ -183,6 +186,21 @@
     </Compile>
     <Compile Include="Entities\D0501.cs">
       <DependentUpon>INVDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\EINVOICELOGGER.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EINVOICELOGGER.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\EINVOICELOGGER.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EINVOICELOGGER.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\EINVOICELOGGER.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EINVOICELOGGER.edmx</DependentUpon>
     </Compile>
     <Compile Include="Entities\Employee.cs">
       <DependentUpon>PORTALDB.tt</DependentUpon>
@@ -259,6 +277,12 @@
     <Compile Include="Entities\STemp.cs">
       <DependentUpon>INVDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\WinningContactDetails.cs">
+      <DependentUpon>EINVOICELOGGER.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\WinningContactMain.cs">
+      <DependentUpon>EINVOICELOGGER.tt</DependentUpon>
+    </Compile>
     <Compile Include="Enums\WinningTypeEnum.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -280,6 +304,16 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Entities\EINVOICELOGGER.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EINVOICELOGGER.edmx</DependentUpon>
+      <LastGenOutput>EINVOICELOGGER.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Entities\EINVOICELOGGER.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EINVOICELOGGER.edmx</DependentUpon>
+      <LastGenOutput>EINVOICELOGGER.cs</LastGenOutput>
+    </Content>
     <Content Include="Entities\ERPDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ERPDB.edmx</DependentUpon>
@@ -353,6 +387,13 @@
     </EntityDeploy>
     <Content Include="Entities\ERPDB.edmx.diagram">
       <DependentUpon>ERPDB.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Entities\EINVOICELOGGER.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EINVOICELOGGER.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Entities\EINVOICELOGGER.edmx.diagram">
+      <DependentUpon>EINVOICELOGGER.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

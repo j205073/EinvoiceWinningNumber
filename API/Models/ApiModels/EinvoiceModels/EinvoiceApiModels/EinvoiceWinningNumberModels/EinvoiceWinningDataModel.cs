@@ -1,5 +1,6 @@
 ﻿using API.Entities;
 using API.Enums;
+using System.Collections.Generic;
 
 namespace API.Models.ApiModels.EinvoiceModels.EinvoiceApiModels.EinvoiceWinningNumberModels
 {
@@ -51,8 +52,9 @@ namespace API.Models.ApiModels.EinvoiceModels.EinvoiceApiModels.EinvoiceWinningN
         public string DepartmentName { get; set; }
 
         /// <summary>
-        /// 通知Email對像 (目前抓取單位主管)
+        /// 通知Email對像 (取資料庫連絡群組)
         /// </summary>
-        public string MailToObject { get; set; }
+        private List<string> m_mailToObject = new List<string>();
+        public List<string> MailToObject { get { return m_mailToObject; } set { m_mailToObject = value; } }
     }
 }

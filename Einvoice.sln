@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EinvoiceWinningNumber", "Ei
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{2620019D-B6FE-4FCB-BDE6-1702FE92354D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mailer", "MailerAPI\Mailer\Mailer.csproj", "{1F36EEE7-581D-43D4-BCB5-B6D8809CF43E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
@@ -43,6 +45,16 @@ Global
 		{2620019D-B6FE-4FCB-BDE6-1702FE92354D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2620019D-B6FE-4FCB-BDE6-1702FE92354D}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
 		{2620019D-B6FE-4FCB-BDE6-1702FE92354D}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{1F36EEE7-581D-43D4-BCB5-B6D8809CF43E}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{1F36EEE7-581D-43D4-BCB5-B6D8809CF43E}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{1F36EEE7-581D-43D4-BCB5-B6D8809CF43E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F36EEE7-581D-43D4-BCB5-B6D8809CF43E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F36EEE7-581D-43D4-BCB5-B6D8809CF43E}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F36EEE7-581D-43D4-BCB5-B6D8809CF43E}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{1F36EEE7-581D-43D4-BCB5-B6D8809CF43E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F36EEE7-581D-43D4-BCB5-B6D8809CF43E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F36EEE7-581D-43D4-BCB5-B6D8809CF43E}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{1F36EEE7-581D-43D4-BCB5-B6D8809CF43E}.SingleImage|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
