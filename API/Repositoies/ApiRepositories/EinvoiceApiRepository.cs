@@ -251,7 +251,7 @@ namespace RinnaiPortalOpenApi.Repositories
         /// </summary>
         /// <param name="invTerm"></param>
         /// <param name="data"></param>
-        public void WriteContactEmailLog(string invTerm, KeyValuePair<string, List<EinvoiceDataModel>> data, List<string> mailTo, bool sendIsSuccess)
+        public void WriteContactEmailLog(string invTerm, KeyValuePair<string, List<EinvoiceDataModel>> data, List<string> mailTo, bool sendIsSuccess, bool isAdmin = false)
         {
             EinvoiceLogger eLog = new EinvoiceLogger();
             List<ContactHistoy> logList = new List<ContactHistoy>();
@@ -268,7 +268,7 @@ namespace RinnaiPortalOpenApi.Repositories
                     WinningNum = d.WinningNumber,
                     WinningPeriod = invTerm,
                     Status = sendIsSuccess ? "success" : "fail",
-                    Messages = sendIsSuccess ? "通知成功" : "通知失敗"
+                    Messages = isAdmin ? sendIsSuccess ? "Admin通知成功" : "Admin通知失敗" : sendIsSuccess ? "通知成功" : "通知失敗"
                 };
                 logList.Add(temp);
             }

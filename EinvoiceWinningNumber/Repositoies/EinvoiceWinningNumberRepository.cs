@@ -20,7 +20,7 @@ namespace EinvoiceWinningNumber.Repositoies
         public void SandMailHandler()
         {
             string currentYear = (DateTime.UtcNow.AddHours(8).Year - 1911).ToString();
-            string currentMonth = (DateTime.UtcNow.AddHours(8).Month - 2).ToString().PadLeft(2, '0');
+            string currentMonth = (DateTime.UtcNow.AddHours(8).AddMonths(-2).Month).ToString().PadLeft(2, '0');
             string invTerm = Api.ConfirmEinvoicePeriodByDate(string.Concat(currentYear, currentMonth));
             Dictionary<string, List<EinvoiceDataModel>> result = new Dictionary<string, List<EinvoiceDataModel>>();
             try
@@ -152,7 +152,7 @@ namespace EinvoiceWinningNumber.Repositoies
 
                     #region 寫入寄信Log檔
 
-                    result.All(a => { Api.WriteContactEmailLog(invTerm, a, adminInfo.To, isSuccessAdminSend); return true; });
+                    result.All(a => { Api.WriteContactEmailLog(invTerm, a, adminInfo.To, isSuccessAdminSend, true); return true; });
 
                     #endregion 寫入寄信Log檔
 
