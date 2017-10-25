@@ -20,7 +20,7 @@ namespace EinvoiceWinningNumber.Repositoies
         public void SandMailHandler()
         {
             string currentYear = (DateTime.UtcNow.AddHours(8).Year - 1911).ToString();
-            string currentMonth = (DateTime.UtcNow.AddHours(8).AddMonths(-2).Month).ToString().PadLeft(2, '0');
+            string currentMonth = (DateTime.UtcNow.AddHours(8).AddMonths(-1).Month).ToString().PadLeft(2, '0');
             string invTerm = Api.ConfirmEinvoicePeriodByDate(string.Concat(currentYear, currentMonth));
             Dictionary<string, List<EinvoiceDataModel>> result = new Dictionary<string, List<EinvoiceDataModel>>();
             try
