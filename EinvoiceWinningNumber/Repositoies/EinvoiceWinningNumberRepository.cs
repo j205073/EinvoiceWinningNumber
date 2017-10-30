@@ -19,9 +19,9 @@ namespace EinvoiceWinningNumber.Repositoies
 
         public void SandMailHandler()
         {
-            string currentYear = (DateTime.UtcNow.AddHours(8).Year - 1911).ToString();
-            //string currentMonth = (DateTime.UtcNow.AddHours(8).AddMonths(-1).Month).ToString().PadLeft(2, '0');
-            string currentMonth = (DateTime.UtcNow.AddHours(8).AddMonths(-2).Month).ToString().PadLeft(2, '0');
+            DateTime today = DateTime.UtcNow.AddHours(8);
+            string currentYear = (today.Year - 1911).ToString();
+            string currentMonth = (today.AddMonths(-1).Month).ToString().PadLeft(2, '0');
             string invTerm = Api.ConfirmEinvoicePeriodByDate(string.Concat(currentYear, currentMonth));
             Dictionary<string, List<EinvoiceDataModel>> result = new Dictionary<string, List<EinvoiceDataModel>>();
             try
@@ -145,7 +145,7 @@ namespace EinvoiceWinningNumber.Repositoies
                     var adminInfo = new MailInfo()
                     {
                         Subject = subject,
-                        To = adminGroup,
+                        To = ProcessUntity.CurrentProcessMode == ProcessModeEnum.RELEASE ? adminGroup : new List<string>() { PublicRepository.AdminEmail },
                         CC = cc,
                         Body = adminMailBody
                     };
