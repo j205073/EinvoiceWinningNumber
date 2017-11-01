@@ -1,9 +1,9 @@
-﻿
-using EinvoiceWinningNumber.Enums;
+﻿using EinvoiceWinningNumber.Enums;
+
 namespace EinvoiceWinningNumber
 {
     /// <summary>
-    /// 設定目前作業模式 
+    /// 設定目前作業模式
     /// </summary>
     public static class ProcessUntity
     {

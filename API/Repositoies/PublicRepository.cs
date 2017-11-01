@@ -13,7 +13,7 @@ namespace RinnaiPortal.Repository
         /// 系統管理員Email帳號
         /// </summary>
         //public static string AdminEmail { get { return "junchen.liu@rinnai.com.tw"; } }
-        public static string AdminEmail { get { return "j205073@gmail.com"; } }
+        public static string AdminEmail { get { return "juncheng.liu@rinnai.com.tw"; } }
         /// <summary>
         /// 資訊課單位代碼
         /// </summary>

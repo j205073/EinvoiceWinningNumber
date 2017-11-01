@@ -27,7 +27,7 @@ namespace EinvoiceWinningNumber.Repositoies
             try
             {
                 string subject = (ProcessUntity.CurrentProcessMode == ProcessModeEnum.DEBUG) ? string.Format("[系統部測試]：電子發票 {0}月份中獎名單", invTerm) : string.Format("[通知]：電子發票 {0}月份中獎名單", invTerm);
-                List<string> cc = new List<string>() { "juncheng.liu@rinnai.com.tw" };
+                List<string> cc = new List<string>() { PublicRepository.AdminEmail };
 
                 var info = new MailInfo()
                 {
